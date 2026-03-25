@@ -40,6 +40,13 @@ Instead of building one-off scripts, this toolkit aims to:
 5. Save structured output  
 
 ---
+## ▶️ How to Run
+
+1. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+---
 
 ## 📂 Project Structure
 
