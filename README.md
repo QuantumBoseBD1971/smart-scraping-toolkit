@@ -49,9 +49,11 @@ pip install -r requirements.txt
 ```
 
 2. Run the scraper:
-```python src/main.py```
+```bash
+python src/main.py
+```
 
-3. Scraped output will be saved to:
+4. Scraped output will be saved to:
 output/
 
 ---
