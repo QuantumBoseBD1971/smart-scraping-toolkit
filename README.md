@@ -44,7 +44,7 @@ Instead of building one-off scripts, this toolkit aims to:
 
 1. Install dependencies:
 
-```bash
+bash
 pip install -r requirements.txt
 ---
 
