@@ -48,7 +48,7 @@ Instead of building one-off scripts, this toolkit aims to:
 pip install -r requirements.txt
 ```
 
-2 . Run the scraper:
+2. Run the scraper:
 ```python src/main.py```
 
 3. Scraped output will be saved to:
