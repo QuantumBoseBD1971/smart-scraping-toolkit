@@ -44,23 +44,47 @@ Instead of building one-off scripts, this toolkit aims to:
 
 1. Install dependencies:
 
-```bash
+```bash 
 pip install -r requirements.txt
 ```
 
-2. Run the scraper:
-```bash
-python src/main.py
+2. Run the scraper using the CLI:
+
+```bash 
+python src/main.py --url https://example.com
 ```
 
-4. Scraped output will be saved to:
+3. Optionally specify a custom output directory:
+
+```bash 
+python src/main.py --url https://example.com
+ --output output
+```
+
+4. Scraped output will be saved in:
+
 output/
+
+---
+## 💻 CLI Usage
+
+Basic usage:
+
+```bash 
+python src/main.py --url https://example.com
+```
+
+Custom output folder:
+
+```bash
+python src/main.py --url https://example.com --output results
+```
 
 ---
 
 ## 📂 Project Structure
 
-```text
+```bash
 smart-scraping-toolkit/
   src/
     detector.py
@@ -71,3 +95,42 @@ smart-scraping-toolkit/
   config/
     settings.json
   output/
+    .gitkeep
+```
+
+## 📦 Example Output
+
+---
+
+```bash
+{
+  "url": "https://example.com",
+  "scrape_mode": "static",
+  "title": "Example Domain",
+  "paragraphs": [
+    "This domain is for use in illustrative examples in documents."
+  ],
+  "links": [
+    {
+      "text": "More information...",
+      "href": "https://www.iana.org/domains/example"
+    }
+  ]
+}
+```
+---
+
+## 🛠 Tech Stack
+Python
+Requests
+BeautifulSoup
+Playwright (planned)
+
+---
+
+## 📌 Status
+
+Early-stage development.
+Currently supports static scraping with CLI interface.
+Dynamic scraping support is planned next.
+
