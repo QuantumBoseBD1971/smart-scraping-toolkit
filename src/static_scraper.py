@@ -3,9 +3,11 @@ from bs4 import BeautifulSoup
 
 
 def scrape_static(url: str):
-    response = requests.get(url, timeout=10, headers={
-        "User-Agent": "Mozilla/5.0"
-    })
+    response = requests.get(
+        url,
+        timeout=10,
+        headers={"User-Agent": "Mozilla/5.0"}
+    )
     soup = BeautifulSoup(response.text, "html.parser")
 
     title = soup.title.string.strip() if soup.title and soup.title.string else "No title"
@@ -15,6 +17,14 @@ def scrape_static(url: str):
         for p in soup.find_all("p")
         if p.get_text(strip=True)
     ]
+
+    headings = []
+    for tag in ["h1", "h2", "h3"]:
+        headings.extend(
+            h.get_text(" ", strip=True)
+            for h in soup.find_all(tag)
+            if h.get_text(strip=True)
+        )
 
     links = []
     for a in soup.find_all("a", href=True):
@@ -30,6 +40,7 @@ def scrape_static(url: str):
         "url": url,
         "scrape_mode": "static",
         "title": title,
-        "paragraphs": paragraphs[:10],
-        "links": links[:25]
+        "headings": headings[:20],
+        "paragraphs": paragraphs[:20],
+        "links": links[:50]
     }
