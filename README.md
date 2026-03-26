@@ -46,6 +46,7 @@ Instead of building one-off scripts, this toolkit aims to:
 
 ```bash 
 pip install -r requirements.txt
+playright install
 ```
 
 2. Run the scraper using the CLI:
@@ -54,31 +55,60 @@ pip install -r requirements.txt
 python src/main.py --url https://example.com
 ```
 
-3. Optionally specify a custom output directory:
+3. Force static mode if needed:
 
 ```bash 
-python src/main.py --url https://example.com
- --output output
+python src/main.py --url https://example.com --mode static
 ```
 
-4. Scraped output will be saved in:
+4. Force dynamic mode if needed:
 
-output/
+```bash 
+python src/main.py --url https://example.com --mode dynamic
+```
+
+5. Optionally specify a custom output directory:
+
+```bash 
+python src/main.py --url https://example.com --mode auto --output results
+```
 
 ---
 ## 💻 CLI Usage
 
-Basic usage:
-
+Auto detection
 ```bash 
 python src/main.py --url https://example.com
 ```
 
-Custom output folder:
-
-```bash
-python src/main.py --url https://example.com --output results
+Static mode
+```bash 
+python src/main.py --url https://example.com --mode static
 ```
+
+Dynamic mode
+```bash 
+python src/main.py --url https://example.com --mode dynamic
+```
+
+Custom output folder
+```bash 
+python src/main.py --url https://example.com --mode auto --output results
+```
+
+Then commit with:
+
+```bash 
+Add Playwright dynamic scraping and mode flag
+```
+
+One important note: after installing dependencies locally, you must run:
+
+```bash 
+playwright install
+```
+
+That installs the browser binaries Playwright needs.
 
 ---
 
@@ -124,7 +154,7 @@ smart-scraping-toolkit/
 Python
 Requests
 BeautifulSoup
-Playwright (planned)
+Playwright 
 
 ---
 
