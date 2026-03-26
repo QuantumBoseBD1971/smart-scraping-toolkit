@@ -3,14 +3,16 @@ import requests
 
 def detect_site_type(url: str) -> str:
     """
-    Basic heuristic:
-    - if initial HTML contains useful text, treat as static
-    - if page is very thin or script-heavy, treat as dynamic
+    Heuristic:
+    - if page has useful paragraph content, treat as static
+    - if script-heavy and content-thin, treat as dynamic
     """
     try:
-        response = requests.get(url, timeout=8, headers={
-            "User-Agent": "Mozilla/5.0"
-        })
+        response = requests.get(
+            url,
+            timeout=8,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
         html = response.text.lower()
 
         if response.status_code != 200:
