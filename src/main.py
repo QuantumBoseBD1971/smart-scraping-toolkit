@@ -22,6 +22,12 @@ def parse_args():
         default="output",
         help="Directory to save JSON output (default: output)"
     )
+    parser.add_argument(
+        "--mode",
+        default="auto",
+        choices=["auto", "static", "dynamic"],
+        help="Scraping mode: auto, static, or dynamic (default: auto)"
+    )
     return parser.parse_args()
 
 
@@ -46,13 +52,19 @@ def save_output(payload: dict, url: str, output_dir: str):
     return output_file
 
 
-def run(url: str, output_dir: str):
+def resolve_mode(url: str, selected_mode: str) -> str:
+    if selected_mode != "auto":
+        return selected_mode
+    return detect_site_type(url)
+
+
+def run(url: str, output_dir: str, mode: str):
     print(f"\nProcessing: {url}")
 
-    site_type = detect_site_type(url)
-    print(f"Detected site type: {site_type}")
+    resolved_mode = resolve_mode(url, mode)
+    print(f"Selected mode: {resolved_mode}")
 
-    if site_type == "static":
+    if resolved_mode == "static":
         data = scrape_static(url)
     else:
         data = scrape_dynamic(url)
@@ -61,6 +73,7 @@ def run(url: str, output_dir: str):
 
     print("\nScrape complete")
     print(f"Title: {data.get('title')}")
+    print(f"Heading count: {len(data.get('headings', []))}")
     print(f"Paragraph count: {len(data.get('paragraphs', []))}")
     print(f"Link count: {len(data.get('links', []))}")
     print(f"Saved to: {output_path}")
@@ -68,4 +81,4 @@ def run(url: str, output_dir: str):
 
 if __name__ == "__main__":
     args = parse_args()
-    run(args.url, args.output)
+    run(args.url, args.output, args.mode)
